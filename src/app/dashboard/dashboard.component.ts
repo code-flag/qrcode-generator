@@ -21,6 +21,15 @@ export class DashboardComponent implements OnInit {
     '4': 'https://www.jumia.com.ng/fashion-2022-mens-casual-sci-fi-warrior-running-sneakers-blackgreen-91374917.html',
     '5': 'https://www.jumia.com.ng/apple-iphone-xs-max-256gb-4gb-space-gray-6.5-case-screen-guide-204777788.html',
   }
+
+  public assignedQrCode: any = [
+    "https://www.jumia.com.ng/generic-f9-fingerprint-touch-bluetooth-earphone-earbuds-power-2200mah-73249119.html",
+    'https://www.jumia.com.ng/titan-beige-dial-golden-stainless-steel-strap-watch-90158602.html',
+    'https://www.jumia.com.ng/keep-moving-first-class-elegant-non-fading-ladies-gold-wristwatch-set-for-boss-chic-82095396.html',
+    'https://www.jumia.com.ng/fashion-2022-mens-casual-sci-fi-warrior-running-sneakers-blackgreen-91374917.html',
+    'https://www.jumia.com.ng/apple-iphone-xs-max-256gb-4gb-space-gray-6.5-case-screen-guide-204777788.html',
+  
+  ]
   public menu: number = 0;
 
 
@@ -61,7 +70,9 @@ export class DashboardComponent implements OnInit {
 
     return randoms
 }
-
+printPage() {
+  window.print();
+}
 // Later call it like so
 
 generatePassword = (passwordLength: number) => {

@@ -10,32 +10,10 @@
     <div [class]="menu === 1 ? 'menu active' : 'menu'" (click)="activeMenu(1)">Assigned Code</div>
     <div [class]="menu === 2 ? 'menu active' : 'menu'" (click)="activeMenu(2)">Logout</div>
   </div>
-  <div class="content" [ngStyle]="menu !== 0 ? {width: '80%', height: '100vh', right: '0', padding: '15px'} : {'color': 'black'}">
-    <!-- <qrcode [qrdata]="'qrCodeStr'" [width]="300" [errorCorrectionLevel]="'M'"></qrcode>
-         -->
+  <div class="content" id="section-to-print" [ngStyle]="menu !== 0 ? {width: '80%', height: '100vh', right: '0', padding: '15px'} : {'color': 'black'}">
          <!-- Home page -->
     <div class="qrcode-wrapper" *ngIf="menu === 0 && isGenerateQrCode">
       <div *ngFor="let item of qrCodeDataArray" >
-        <!-- <div class="qrcodeImage">
-                    <qrcode
-                      [qrdata]="'https://github.com/Cordobo/angularx-qrcode'"
-                      [allowEmptyString]="true"
-                      [ariaLabel]="'QR Code image with the following content...'"
-                      [cssClass]="'center'"
-                      [colorDark]="'#000000ff'"
-                      [colorLight]="'#fff'"
-                      [elementType]="'canvas'"
-                      [errorCorrectionLevel]="'M'"
-                      [imageSrc]="'./assets/angular-logo.png'"
-                      [imageHeight]="85"
-                      [imageWidth]="90"
-                      [margin]="4"
-                      [scale]="1"
-                      [title]="'A custom title attribute'"
-                      [width]="300"
-                    ></qrcode>
-                  </div> -->
-
         <qrcode
           (qrCodeURL)="onChangeURL($event)"
           [qrdata]="item"
@@ -50,15 +28,31 @@
     </div>
 
     <!-- Assigned to -->
-    <div *ngIf="menu === 1"> Assigned to</div>
+    <div *ngIf="menu === 1"> 
+        <h2>Assigned QRcode</h2>
+        <div class="qrcode-wrapper" *ngIf="isGenerateQrCode">
+            <div *ngFor="let item of assignedQrCode" >
+              <qrcode
+                (qrCodeURL)="onChangeURL($event)"
+                [qrdata]="item"
+                [ariaLabel]="item"
+                [width]="200"
+                [errorCorrectionLevel]="'M'"
+              ></qrcode>
+              <div class="qr-download-btn">
+                  <a [href]="qrCodeDownloadLink" download="qrcode">Download</a>
+              </div>
+            </div>
+          </div>
+    </div>
     <!-- logout -->
     <div *ngIf="menu === 2"> You are logout. Login to have access</div>
   </div>
   <div class="control-bar" *ngIf="menu === 0">
-    <h2>QrCode Settings</h2>
+    <h2>QRcode Settings</h2>
     <div class="form">
       <label for="total-qrcode" title="TOtal number of qr code to generate"
-        >Number of QrCode</label
+        >Number of QRcode</label
       >
       <input
         type="number"
@@ -68,7 +62,7 @@
         [(ngModel)]="totalQrCode"
       />
 
-      <label for="qrc-size">Select QrCode image Size</label>
+      <label for="qrc-size">Select QRcode image Size</label>
       <select name="qrc-size" id="qrc-size" [(ngModel)]="qrCodeSize">
         <option value="100">100</option>
         <option value="150">150</option>
@@ -80,6 +74,7 @@
       </select>
 
       <input type="button" value="generate" class="submit-btn" (click)="generateQrcode()" />
+      <input *ngIf="isGenerateQrCode" type="button" value="Print all QRcode" class="submit-btn" (click)="printPage()" />
     </div>
   </div>
 </div>
