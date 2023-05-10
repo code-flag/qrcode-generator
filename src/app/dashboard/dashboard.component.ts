@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
   public isGenerateQrCode: boolean = false;
   public totalLuckyNumber: number = 5;
   public qrCodeDataArray: any[] = [];
+  public customUrl: any = "";
+  public customDownloadFilename = "new-qrcode";
   public luckyURL: any = {
    "1": "https://www.jumia.com.ng/generic-f9-fingerprint-touch-bluetooth-earphone-earbuds-power-2200mah-73249119.html",
     '2': 'https://www.jumia.com.ng/titan-beige-dial-golden-stainless-steel-strap-watch-90158602.html',
@@ -102,5 +104,10 @@ activeMenu(menu: number) {
 ngOnInit(): void {
   this.activeMenu(0);
 }
+
+public getCustomUrl = (event: any) => {
+   this.customUrl = event.target.value;
+}
+
 
 }
